@@ -11,24 +11,46 @@ const alert = require('../../assets/sounds/alert.wav')
 
 class EMOMScreen extends Component {
   state = {
-    countdown: 1,
-    alert: 0,
+    countdown: 0,
+    alert: 15,
     time: '15',
     isRunning: false,
 
-    countdownTimerValue: 5,
+    countdownTimerValue: 0,
     count: 0
   }
-  play = () => {
+  componentDidMount = () => {
     Sound.setCategory('Playback', true)
     this.alert = new Sound(alert)
+  }
+  checkAlert = () => {
+    const secondsCount = this.state.count % 60
+    if (secondsCount == this.state.alert) {
+      this.alert.play()
+    }
+    if (this.state.countdown === 1) {
+      if (secondsCount >= 55 && secondsCount < 60)
+        this.alert.play()
+    }
+  }
+  stop = () => {
+    clearInterval(this.countdownTimer)
+    clearInterval(this.countTimer)
     this.setState({
-      isRunning: true
+      isRunning: false
+    })
+  }
+  play = () => {
+    this.setState({
+      isRunning: true,
+      countdownTimerValue: this.state.countdown ? 5 : 0,
+      count: 0
     })
     const count = () => {
       this.setState({
         count: this.state.count + 1
       }, () => {
+        this.checkAlert()
         if (this.state.count === parseInt(this.state.time * 60)) {
           clearInterval(this.countTimer)
         }
@@ -36,6 +58,7 @@ class EMOMScreen extends Component {
     }
 
     if (this.state.countdown === 1) {
+      this.alert.play()
       this.countdownTimer = setInterval(() => {
         this.setState({ countdownTimerValue: this.state.countdownTimerValue - 1 }, () => {
           this.alert.play()
@@ -56,11 +79,30 @@ class EMOMScreen extends Component {
     if (this.state.isRunning) {
       return (
         <BackgroundProgress percentage={percMinute}>
-          <SafeAreaView style={{flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Timer time={this.state.count} />
-            <ProgressBar color="white" percentage={percTime} />
-            <Timer time={parseInt((this.state.time * 60)) -this.state.count} text="counter2" appendedText=" restantes" />
-          </SafeAreaView>
+          <View style={{ flex: 1, justifyContent: 'center' }}>
+            <Title title='EMOM' subtitle="Every Minute on the Minute" margimContainer={{ paddingVertical: 50 }} />
+          </View>
+          <View style={{ flex: 1 }}>
+            {
+              this.state.countdownTimerValue > 0 ?
+                <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                  <Text style={styles.countdown}>{this.state.countdownTimerValue}</Text>
+                </View>
+                :
+                <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                  <Timer time={this.state.count} />
+                  <ProgressBar color="white" percentage={percTime} />
+                  <Timer time={parseInt((this.state.time * 60)) - this.state.count} text="counter2" appendedText=" restantes" />
+                </View>
+            }
+          </View>
+          <View style={{ flex: 1, alignItems: 'center' }}>
+            <TouchableOpacity style={{ alignSelf: 'center' }} onPress={this.stop}>
+              <Image
+                style={{ width: 70, height: 70, tintColor: 'white' }}
+                source={require('../../assets/images/stop.png')} />
+            </TouchableOpacity>
+          </View>
         </BackgroundProgress>
       )
     }
@@ -153,6 +195,12 @@ const styles = StyleSheet.create({
     color: 'white',
     fontFamily: 'Ubuntu-Regular',
     fontSize: 24,
+  },
+  countdown: {
+    fontFamily: 'Ubuntu-Bold',
+    fontSize: 144,
+    color: 'white',
+    textAlign: 'center'
   }
 })
 export default EMOMScreen

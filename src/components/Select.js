@@ -38,9 +38,8 @@ class Select extends Component {
             return (
               <TouchableOpacity
                 onPress={this.handleSelectedOption(id)}
-                style={this.state.optionSelected == id ? styles.optionSelected : null}
                 key={id}>
-                <Text style={styles.textLabel}>{labelOption}</Text>
+                <Text style={[styles.textLabel, this.state.optionSelected == id ? styles.optionSelected : null]}>{labelOption}</Text>
               </TouchableOpacity>
             )
           })}
@@ -67,7 +66,9 @@ const styles = StyleSheet.create({
     fontSize: 24
   },
   optionSelected: {
-    backgroundColor: 'rgba(255,255,255, 0.6)'
+    // backgroundColor: 'rgba(255,255,255, 0.6)'
+    textDecorationLine: 'underline',
+    textTransform: 'uppercase'
   }
 })
 export default Select
