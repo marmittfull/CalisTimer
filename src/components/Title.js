@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native'
 
 const Title = props => {
   return (
-    <View style={[styles.container, props.margimContainer]}>
+    <View style={[styles.container, props.marginContainer]}>
       <Text style={styles.title}>
         {props.title}
       </Text>

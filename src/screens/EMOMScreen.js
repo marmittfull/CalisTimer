@@ -11,7 +11,7 @@ const alert = require('../../assets/sounds/alert.wav')
 
 class EMOMScreen extends Component {
   state = {
-    countdown: 0,
+    countdowntest: 0,
     alert: 15,
     time: '15',
     isRunning: false,
@@ -21,14 +21,14 @@ class EMOMScreen extends Component {
   }
   componentDidMount = () => {
     Sound.setCategory('Playback', true)
-    this.alert = new Sound(alert)
-  }
+  this.alert = new Sound(alert)
+}
   checkAlert = () => {
     const secondsCount = this.state.count % 60
     if (secondsCount == this.state.alert) {
       this.alert.play()
     }
-    if (this.state.countdown === 1) {
+    if (this.state.countdowntest === 1) {
       if (secondsCount >= 55 && secondsCount < 60)
         this.alert.play()
     }
@@ -43,7 +43,7 @@ class EMOMScreen extends Component {
   play = () => {
     this.setState({
       isRunning: true,
-      countdownTimerValue: this.state.countdown ? 5 : 0,
+      countdownTimerValue: this.state.countdowntest ? 5 : 0,
       count: 0
     })
     const count = () => {
@@ -57,7 +57,7 @@ class EMOMScreen extends Component {
       })
     }
 
-    if (this.state.countdown === 1) {
+    if (this.state.countdowntest === 1) {
       this.alert.play()
       this.countdownTimer = setInterval(() => {
         this.setState({ countdownTimerValue: this.state.countdownTimerValue - 1 }, () => {
@@ -109,7 +109,7 @@ class EMOMScreen extends Component {
     return (
       // <KeyboardAvoidingView style={styles.container} behavior='padding'>
       <SafeAreaView style={styles.container}>
-        <Title title='EMOM' subtitle="Every Minute on the Minute" margimContainer={{ paddingVertical: 50 }} />
+        <Title title='EMOM' subtitle="Every Minute on the Minute" marginContainer={{ paddingVertical: 50 }} />
         <Image
           style={{ width: 50, height: 50, tintColor: 'white', alignSelf: 'center', marginBottom: 17 }}
           source={require('../../assets/images/config.png')} />
@@ -148,7 +148,7 @@ class EMOMScreen extends Component {
               label: 'não'
             }
           ]}
-          defaultValue={this.state.countdown}
+          defaultValue={this.state.countdowntest}
           label={'Contagem regressiva'}
           selectedOption={opt => this.setState({ countdown: opt })}
           style={{ paddingBottom: 30 }}

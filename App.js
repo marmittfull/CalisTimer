@@ -8,11 +8,13 @@ import { createStackNavigator } from 'react-navigation-stack'
 import { createAppContainer } from 'react-navigation'
 import HomeScreen from './src/screens/HomeScreen'
 import EMOMScreen from './src/screens/EMOMScreen'
+import IsometriaScreen from './src/screens/IsometriaScreen'
 
 const StackNavigator = createStackNavigator({
   'Home': HomeScreen,
-  'EMOM': EMOMScreen
-}, { initialRouteName: 'EMOM' })
+  'EMOM': EMOMScreen,
+  'ISO' : IsometriaScreen
+}, { initialRouteName: 'Home' })
 
 export default createAppContainer(StackNavigator)
   

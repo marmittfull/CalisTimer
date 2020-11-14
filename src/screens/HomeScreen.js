@@ -6,15 +6,15 @@ import Title from '../components/Title'
 const HomeScreen = props => {
   return(
     <View style={styles.container}>
-      <Title title="CalisTimer" margimContainer={{marginTop: 111, marginBottom: 277}} />
+      <Title title="CalisTimer" marginContainer={{marginTop: 111, marginBottom: 277}} />
       <Button style={styles.buttonView} onPress={() => props.navigation.navigate('EMOM')}>
         EMOM
       </Button>
-      <Button style={styles.buttonView}>
+      <Button style={styles.buttonView} onPress={() => props.navigation.navigate('AMRAP')}>
         AMRAP
       </Button>
-      <Button style={styles.buttonView}>
-        Isomeria
+      <Button style={styles.buttonView} onPress={() => props.navigation.navigate('ISO')}>
+        Isometria
       </Button>
     </View>
   )

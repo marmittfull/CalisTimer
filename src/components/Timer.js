@@ -1,4 +1,3 @@
-import { counter } from '@fortawesome/fontawesome-svg-core'
 import React from 'react'
 import {
   View, Text, StyleSheet
