@@ -7,7 +7,7 @@
 
 # CalisTimer
 
-> The project aims to build an application to practitioners of calisthenics, where the user can choose between different types of training, monitoring his progress with timers and sound alerts.
+> Application for calisthenics
 
 <h3 align="center">
   <img alt="ReactNative" 
@@ -25,7 +25,7 @@
 
 ## 💡 About the challenge:
 
-This challenge aims to put into practice the concepts learned about React Native, to develop this challenge an API written in Node was used that was made in the NodeJS challenge.
+The project aims to build an application to practitioners of calisthenics, where the user can choose between different types of training, monitoring his progress with timers and sound alerts.
 
 ## 🔥 Functionalities:
 
